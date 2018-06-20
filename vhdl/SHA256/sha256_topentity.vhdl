@@ -8,7 +8,7 @@ use work.all;
 use work.sha256_types.all;
 
 entity sha256_topentity is
-  port(input_0    : in std_logic_vector(479 downto 0);
+  port(input_0    : in std_logic_vector(319 downto 0);
        output_0_0 : out std_logic_vector(31 downto 0);
        output_0_1 : out std_logic_vector(31 downto 0);
        output_0_2 : out std_logic_vector(31 downto 0);

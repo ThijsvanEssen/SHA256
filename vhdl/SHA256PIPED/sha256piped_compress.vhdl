@@ -9,13 +9,13 @@ use work.sha256piped_types.all;
 
 entity sha256piped_compress is
   port(ds     : in sha256piped_types.array_of_std_logic_vector_32(0 to 7);
-       ds1    : in sha256piped_types.tup2_0;
+       ds1    : in sha256piped_types.tup2;
        result : out sha256piped_types.array_of_std_logic_vector_32(0 to 7));
 end;
 
 architecture structural of sha256piped_compress is
   signal case_alt         : sha256piped_types.array_of_std_logic_vector_32(0 to 7);
-  signal case_scrut       : sha256piped_types.tup2_1;
+  signal case_scrut       : sha256piped_types.tup2_0;
   signal result_0         : sha256piped_types.array_of_std_logic_vector_32(0 to 8);
   signal x                : sha256piped_types.array_of_std_logic_vector_32(0 to 7);
   signal app_arg          : sha256piped_types.array_of_std_logic_vector_32(0 to 0);
@@ -82,7 +82,7 @@ begin
   
   result_0 <= sha256piped_types.array_of_std_logic_vector_32'(sha256piped_types.array_of_std_logic_vector_32'(app_arg) & sha256piped_types.array_of_std_logic_vector_32'(app_arg_0));
   
-  x <= case_scrut.tup2_1_sel0;
+  x <= case_scrut.tup2_0_sel0;
   
   app_arg <= sha256piped_types.array_of_std_logic_vector_32'(0 => app_arg_1);
   
@@ -118,7 +118,7 @@ begin
   c <= scrut1(0);
   -- head end
   
-  w <= ds1.tup2_0_sel1;
+  w <= ds1.tup2_sel1;
   
   -- tail begin
   scrut <= ds(1 to ds'high);
@@ -138,7 +138,7 @@ begin
   
   temp1_app_arg_0 <= std_logic_vector(unsigned(temp1_app_arg_1) + unsigned(temp1_app_arg_2));
   
-  k1 <= ds1.tup2_0_sel0;
+  k1 <= ds1.tup2_sel0;
   
   -- tail begin
   scrut1 <= scrut(1 to scrut'high);

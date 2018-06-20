@@ -8,7 +8,7 @@ use work.all;
 use work.sha256piped_types.all;
 
 entity sha256piped_flip is
-  port(x      : in sha256piped_types.tup2_0;
+  port(x      : in sha256piped_types.tup2;
        y      : in sha256piped_types.array_of_std_logic_vector_32(0 to 7);
        result : out sha256piped_types.array_of_std_logic_vector_32(0 to 7));
 end;

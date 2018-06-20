@@ -129,11 +129,11 @@ digest :: Message -> HashState
 digest blocks = foldl hash hs blocks
 
 -- | Helper function to counter act pin constraints on an FPGA.
-digest' :: BitVector 480 -> HashState
-digest' block = digest ((pack ((unpack block :: Vec 15 (BitVector 32)) ++ repeat 0 :: Vec 16 (BitVector 32))):>Nil)
+digest' :: BitVector 320 -> HashState
+digest' block = digest ((pack ((unpack block :: Vec 10 (BitVector 32)) ++ repeat 0 :: Vec 16 (BitVector 32))):>Nil)
 
 -- | TopEntity declarded for CLaSH Compiler.
-topEntity :: BitVector 480 -> HashState
+topEntity :: BitVector 320 -> HashState
 topEntity = digest'
 
 -- Examples Blocks --
@@ -141,5 +141,5 @@ topEntity = digest'
 emptyString :: Block
 emptyString  = pack ((2^31 :: BitVector 32) :> replicate d15 (0 :: BitVector 32) :: Vec 16 (BitVector 32))
 
-emptyString' :: BitVector 480
-emptyString'  = pack ((2^31 :: BitVector 32) :> replicate d14 (0 :: BitVector 32) :: Vec 15 (BitVector 32))
+emptyString' :: BitVector 320
+emptyString'  = pack ((2^31 :: BitVector 32) :> replicate d9 (0 :: BitVector 32) :: Vec 10 (BitVector 32))

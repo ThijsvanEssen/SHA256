@@ -18,14 +18,14 @@ entity sha256piped_compressblock is
 end;
 
 architecture structural of sha256piped_compressblock is
-  signal f             : sha256piped_types.array_of_tup2_0(0 to 1);
-  signal x             : sha256piped_types.array_of_tup2_0(0 to 1);
-  signal ds_app_arg    : sha256piped_types.array_of_tup2_0(0 to 63);
-  signal l             : sha256piped_types.array_of_tup2_0(0 to 61);
+  signal f             : sha256piped_types.array_of_tup2(0 to 1);
+  signal x             : sha256piped_types.array_of_tup2(0 to 1);
+  signal ds_app_arg    : sha256piped_types.array_of_tup2(0 to 63);
+  signal l             : sha256piped_types.array_of_tup2(0 to 61);
   signal ws1_app_arg   : sha256piped_types.array_of_array_of_8_std_logic_vector_32(0 to 1);
-  signal ds            : sha256piped_types.tup2_2;
+  signal ds            : sha256piped_types.tup2_1;
   signal ws1           : sha256piped_types.array_of_array_of_8_std_logic_vector_32(0 to 1);
-  signal x_0           : sha256piped_types.array_of_tup2_0(0 to 61);
+  signal x_0           : sha256piped_types.array_of_tup2(0 to 61);
   signal result_0      : sha256piped_types.array_of_array_of_8_std_logic_vector_32(0 to 2);
   signal result_1      : sha256piped_types.array_of_std_logic_vector_32(0 to 7);
   signal ws1_app_arg_0 : sha256piped_types.array_of_array_of_8_std_logic_vector_32(0 to 61);
@@ -33,7 +33,7 @@ architecture structural of sha256piped_compressblock is
   signal ws1_0         : sha256piped_types.array_of_array_of_8_std_logic_vector_32(0 to 61);
   signal result_2      : sha256piped_types.array_of_array_of_8_std_logic_vector_32(0 to 62);
 begin
-  f <= ds.tup2_2_sel0;
+  f <= ds.tup2_1_sel0;
   
   x <= f;
   
@@ -46,13 +46,13 @@ begin
     vec2 <= pts;
     zipwith_0 : for i in ds_app_arg'range generate
     begin
-      ds_app_arg(i) <= (tup2_0_sel0 => vec1(i)
-  ,tup2_0_sel1 => vec2(i));
+      ds_app_arg(i) <= (tup2_sel0 => vec1(i)
+  ,tup2_sel1 => vec2(i));
     end generate;
   end block;
   -- zipWith end
   
-  l <= ds.tup2_2_sel1;
+  l <= ds.tup2_1_sel1;
   
   -- init begin
   ws1_app_arg <= result_0(0 to result_0'high - 1);

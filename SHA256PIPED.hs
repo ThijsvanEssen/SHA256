@@ -46,9 +46,9 @@ digest :: Message -> Signal HashState
 digest blocks = foldl hash (signal hs) blocks
 
 -- | Helper function to counter act pin constraints on an FPGA.
-digest' :: BitVector 480 -> Signal HashState
-digest' block = digest ((pack ((unpack block :: Vec 15 (BitVector 32)) ++ repeat 0 :: Vec 16 (BitVector 32))):>Nil)
+digest' :: BitVector 320 -> Signal HashState
+digest' block = digest ((pack ((unpack block :: Vec 10 (BitVector 32)) ++ repeat 0 :: Vec 16 (BitVector 32))):>Nil)
 
 -- | TopEntity declarded for CLaSH Compiler.
-topEntity :: BitVector 480 -> Signal HashState
+topEntity :: BitVector 320 -> Signal HashState
 topEntity = digest'

@@ -13,7 +13,7 @@ entity sha256piped_constructschedule is
 end;
 
 architecture structural of sha256piped_constructschedule is
-  signal case_scrut : sha256piped_types.tup2;
+  signal case_scrut : sha256piped_types.tup2_2;
   signal app_arg    : sha256piped_types.array_of_std_logic_vector_32(0 to 64);
   signal zsr        : sha256piped_types.array_of_std_logic_vector_32(0 to 63);
   signal app_arg_0  : sha256piped_types.array_of_std_logic_vector_32(0 to 0);
@@ -42,7 +42,7 @@ begin
   
   app_arg <= sha256piped_types.array_of_std_logic_vector_32'(sha256piped_types.array_of_std_logic_vector_32'(w) & sha256piped_types.array_of_std_logic_vector_32'(app_arg_0));
   
-  zsr <= case_scrut.tup2_sel1;
+  zsr <= case_scrut.tup2_2_sel1;
   
   app_arg_0 <= sha256piped_types.array_of_std_logic_vector_32'(0 => result_0);
   

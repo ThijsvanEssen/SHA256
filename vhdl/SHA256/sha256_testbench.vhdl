@@ -13,7 +13,7 @@ end;
 
 architecture structural of sha256_testbench is
   signal finished : boolean;
-  signal arg      : std_logic_vector(479 downto 0);
+  signal arg      : std_logic_vector(319 downto 0);
   signal result   : sha256_types.array_of_std_logic_vector_32(0 to 7);
 begin
   done <= finished;
@@ -23,7 +23,7 @@ begin
       (arg    => arg
       ,result => result);
   
-  arg <= std_logic_vector'(0 to 479 => 'X');
+  arg <= std_logic_vector'(0 to 319 => 'X');
   
   finished <=
   -- pragma translate_off
