@@ -1,4 +1,4 @@
-module SHA256 where
+module SHA256REG where
 
 import CLaSH.Prelude
 import CLaSH.Sized.Internal.BitVector
@@ -49,6 +49,12 @@ hs = (0x6a09e667 :> 0xbb67ae85 :> 0x3c6ef372 :> 0xa54ff53a :> 0x510e527f :> 0x9b
 
 -- Auxillary and prettify functions --
 
+-- | Initla value for register.
+initRegState :: HashState
+initRegState = repeat 8
+-- | Initla value for register.
+initRegMessage :: Message
+initRegMessage = repeat 8
 -- | Unicode wrapper for `xor`
 (⊕) :: Bits a => a -> a -> a
 x ⊕ y = xor x y
@@ -125,15 +131,19 @@ hash hashState block = hashState'
 -- | The digest function creates the hash for a message which is already properly formatted.
 --   By folding over every block with the hash function the Hash Values are updated in accordance
 --   with the specification and yield the correct result.
-digest :: Message -> HashState
-digest blocks = foldl hash hs blocks
+digest :: Message -> Signal HashState
+digest blocks = oReg
+  where
+    iReg = register initRegMessage (signal blocks)
+    hVal = foldl hash <$> signal hs <*> iReg
+    oReg = register initRegState hVal
 
 -- | Helper function to counter act pin constraints on an FPGA.
-digest' :: BitVector 320 -> HashState
+digest' :: BitVector 320 -> Signal HashState
 digest' block = digest ((pack ((unpack block :: Vec 10 (BitVector 32)) ++ repeat 0 :: Vec 16 (BitVector 32))):>Nil)
 
 -- | TopEntity declarded for CLaSH Compiler.
-topEntity :: BitVector 320 -> HashState
+topEntity :: BitVector 320 -> Signal HashState
 topEntity = digest'
 
 -- Examples Blocks --
